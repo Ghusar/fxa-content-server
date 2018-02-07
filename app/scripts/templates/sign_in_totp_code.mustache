@@ -1,0 +1,36 @@
+<div id="main-content" class="card">
+  <header>
+    <h1 id="fxa-signin-code-header">{{#t}}Enter authentication code{{/t}}
+        {{#serviceName}}
+            <span class="service">{{#t}}Continue to %(serviceName)s{{/t}}</span>
+        {{/serviceName}}
+    </h1>
+  </header>
+
+  <section>
+    <div class="error"></div>
+    <div class="success"></div>
+
+    <div class="graphic graphic-two-factor-auth"></div>
+
+    <p class="verification-email-message">
+    {{#t}}Please enter the code provided by your authentication app.{{/t}}
+    </p>
+
+    <form novalidate>
+      <div class="input-row token-code-row">
+        <input type="text" class="tooltip-below totp-code" placeholder="{{#t}}Enter 6-digit code{{/t}}" required autofocus />
+      </div>
+
+      <div class="button-row">
+        <button type="submit" class="use-logged-in">{{#t}}Continue{{/t}}</button>
+      </div>
+
+    </form>
+
+    <div class="links">
+        <a id="use-backup-link" class="delayed-fadein left" target="_blank">{{#t}}Use backup code{{/t}}</a>
+        <a id="get-code-email-link" class="delayed-fadein right" target="_blank">{{#t}}Get code by email{{/t}}</a>
+    </div>
+  </section>
+</div>

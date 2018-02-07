@@ -33,12 +33,18 @@ define(function (require, exports, module) {
       this.navigate('settings/clients');
     },
 
+    _returnToSecurity () {
+      this.navigate('settings/security');
+    },
+
     _returnToSettings () {
       this.navigate('settings');
     },
 
     onModalCancel () {
-      if (this.currentPage === 'settings/clients/disconnect') {
+      if (this.currentPage === 'settings/security/recovery_codes') {
+        this._returnToSecurity();
+      } else if (this.currentPage === 'settings/clients/disconnect') {
         this._returnToClients();
       } else {
         this._returnToSettings();

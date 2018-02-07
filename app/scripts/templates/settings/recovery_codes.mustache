@@ -1,0 +1,23 @@
+<div id="recovery-codes">
+    <section class="modal-panel">
+        <p class="modal-success">Two-step authentication enabled</p>
+
+        <h2>{{#t}}Recovery codes{{/t}}</h2>
+
+        <p class="intro">
+            {{#t}}Put these in a safe spot. If you lose your device and don't have the recovery codes you will lose access to your account.{{/t}}
+        </p>
+
+        <form novalidate>
+            <div id="recovery-code-container">
+                {{#recoveryCodes}}
+                    <div class="recovery-code">{{code}}</div>
+                {{/recoveryCodes}}
+            </div>
+            <div class="button-row">
+                <button type="submit" id="submit-btn" class="settings-button primary">{{#t}}Print{{/t}}</button>
+                <button class="settings-button secondary cancel-done">{{#t}}Done{{/t}}</button>
+            </div>
+        </form>
+    </section>
+</div>

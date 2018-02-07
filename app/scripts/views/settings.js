@@ -23,6 +23,7 @@ define(function (require, exports, module) {
   const Duration = require('duration');
   const EmailsView = require('./settings/emails');
   const LoadingMixin = require('./mixins/loading-mixin');
+  const RecoveryCodesView = require('./settings/recovery_codes');
   const modal = require('modal'); //eslint-disable-line no-unused-vars
   const Session = require('../lib/session');
   const SettingsHeaderTemplate = require('templates/partial/settings-header.mustache');
@@ -31,10 +32,14 @@ define(function (require, exports, module) {
   const Template = require('templates/settings.mustache');
   const UserAgentMixin = require('../lib/user-agent-mixin');
 
+  const SecurityView = require('./settings/security');
+
   var PANEL_VIEWS = [
     AvatarView,
     DisplayNameView,
     EmailsView,
+    SecurityView,
+    RecoveryCodesView,
     ClientsView,
     ClientDisconnectView,
     CommunicationPreferencesView,

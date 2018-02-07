@@ -892,7 +892,15 @@ define(function (require, exports, module) {
      * @param {String} code tokenCode
      * @returns {Promise} resolves when complete
      */
-    verifyTokenCode: createClientDelegate('verifyTokenCode')
+    verifyTokenCode: createClientDelegate('verifyTokenCode'),
+
+    createTotpToken: createClientDelegate('createTotpToken'),
+
+    deleteTotpToken: createClientDelegate('deleteTotpToken'),
+
+    checkTotpTokenExists: createClientDelegate('checkTotpTokenExists'),
+
+    checkTotpCode: createClientDelegate('checkTotpCode')
   };
 
   module.exports = FxaClientWrapper;

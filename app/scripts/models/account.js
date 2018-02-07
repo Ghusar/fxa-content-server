@@ -1214,7 +1214,33 @@ define(function (require, exports, module) {
         this.get('sessionToken'),
         email
       );
+    },
+
+    createTotpToken () {
+      return this._fxaClient.createTotpToken(
+        this.get('sessionToken')
+      );
+    },
+
+    deleteTotpToken () {
+      return this._fxaClient.deleteTotpToken(
+        this.get('sessionToken')
+      );
+    },
+
+    checkTotpCode (code) {
+      return this._fxaClient.checkTotpCode(
+        this.get('sessionToken'),
+        code
+      );
+    },
+
+    checkTotpTokenExists () {
+      return this._fxaClient.checkTotpTokenExists(
+        this.get('sessionToken')
+      );
     }
+
   }, {
     ALLOWED_KEYS: ALLOWED_KEYS,
     PERMISSIONS_TO_KEYS: PERMISSIONS_TO_KEYS

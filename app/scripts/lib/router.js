@@ -34,11 +34,13 @@ define(function (require, exports, module) {
   const PermissionsView = require('../views/permissions');
   const PpView = require('../views/pp');
   const ReadyView = require('../views/ready');
+  const RecoveryCodesView = require('../views/settings/recovery_codes');
   const ReportSignInView = require('../views/report_sign_in');
   const ResetPasswordView = require('../views/reset_password');
   const SettingsView = require('../views/settings');
   const SignInBouncedView = require('../views/sign_in_bounced');
   const SignInTokenCodeView = require('../views/sign_in_token_code');
+  const SignInTotpCodeView = require('../views/sign_in_totp_code');
   const SignInPasswordView = require('../views/sign_in_password');
   const SignInReportedView = require('../views/sign_in_reported');
   const SignInUnblockView = require('../views/sign_in_unblock');
@@ -49,6 +51,7 @@ define(function (require, exports, module) {
   const SmsSentView = require('../views/sms_sent');
   const Storage = require('./storage');
   const TosView = require('../views/tos');
+  const SecurityView = require('../views/settings/security');
   const VerificationReasons = require('./verification-reasons');
   const WhyConnectAnotherDeviceView = require('../views/why_connect_another_device');
 
@@ -107,12 +110,15 @@ define(function (require, exports, module) {
       'settings/delete_account(/)': createChildViewHandler(DeleteAccountView, SettingsView),
       'settings/display_name(/)': createChildViewHandler(DisplayNameView, SettingsView),
       'settings/emails(/)': createChildViewHandler(EmailsView, SettingsView),
+      'settings/security(/)': createChildViewHandler(SecurityView, SettingsView),
+      'settings/security/recovery_codes(/)': createChildViewHandler(RecoveryCodesView, SettingsView),
       'signin(/)': 'onSignIn',
       'signin_bounced(/)': createViewHandler(SignInBouncedView),
       'signin_confirmed(/)': createViewHandler(ReadyView, { type: VerificationReasons.SIGN_IN }),
       'signin_permissions(/)': createViewHandler(PermissionsView, { type: VerificationReasons.SIGN_IN }),
       'signin_reported(/)': createViewHandler(SignInReportedView),
       'signin_token_code(/)': createViewHandler(SignInTokenCodeView),
+      'signin_totp_code(/)': createViewHandler(SignInTotpCodeView),
       'signin_unblock(/)': createViewHandler(SignInUnblockView),
       'signin_verified(/)': createViewHandler(ReadyView, { type: VerificationReasons.SIGN_IN }),
       'signup(/)': 'onSignUp',
