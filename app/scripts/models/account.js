@@ -420,6 +420,7 @@ define(function (require, exports, module) {
       var email = this.get('email');
       return Promise.resolve().then(() => {
         var sessionToken = this.get('sessionToken');
+        console.log('SIGN IN', email, password, sessionToken);
         if (password) {
           const signinOptions = {
             metricsContext: this._metrics.getFlowEventMetadata(),
@@ -442,7 +443,13 @@ define(function (require, exports, module) {
             signinOptions.verificationMethod = options.verificationMethod;
           }
 
-          return this._fxaClient.signIn(email, password, relier, signinOptions);
+          if (sessionToken) {
+            // We have an existing sessionToken, re-authenticate it.
+            return this._fxaClient.reauth(sessionToken, email, password, relier, signinOptions);
+          } else {
+            // We need to do a completely fresh login.
+            return this._fxaClient.signIn(email, password, relier, signinOptions);
+          }
         } else if (sessionToken) {
           // We have a cached Sync session so just check that it hasn't expired.
           // The result includes the latest verified state

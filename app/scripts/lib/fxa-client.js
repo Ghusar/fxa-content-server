@@ -298,6 +298,54 @@ define(function (require, exports, module) {
         });
     }),
 
+    reauth: withClient((client, sessionToken, email, password, relier, options = {}) => {
+      var signInOptions = {
+        keys: wantsKeys(relier),
+        reason: options.reason || SignInReasons.SIGN_IN
+      };
+
+      // `service` is sent on signIn to notify users when a new service
+      // has been attached to their account.
+      if (relier.has('service')) {
+        signInOptions.service = relier.get('service');
+      }
+
+      if (relier.has('redirectTo')) {
+        signInOptions.redirectTo = relier.get('redirectTo');
+      }
+
+      if (options.unblockCode) {
+        signInOptions.unblockCode = options.unblockCode;
+      }
+
+      if (options.resume) {
+        signInOptions.resume = options.resume;
+      }
+
+      // XXX TODO: should we be able to set verificationMethod here?
+      // Currently /session/reauth will only do email loop via resend.
+      //if (options.verificationMethod) {
+      //  signInOptions.verificationMethod = options.verificationMethod;
+      //}
+
+      setMetricsContext(signInOptions, options);
+
+      return client.reauth(sessionToken, email, password, signInOptions)
+        .then(function (accountData) {
+          if (! accountData.verified &&
+              ! accountData.hasOwnProperty('verificationReason')) {
+            //if (signInOptions.verificationMethod) {
+            //  accountData.verificationMethod = signInOptions.verificationMethod;
+            //} else {
+            accountData.verificationMethod = VerificationMethods.EMAIL;
+            //}
+          }
+
+          accountData.sessionToken = sessionToken;
+          return getUpdatedSessionData(email, relier, accountData, options);
+        });
+    }),
+
     /**
      * Sign up a user
      *

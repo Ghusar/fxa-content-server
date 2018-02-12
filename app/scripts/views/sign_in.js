@@ -113,9 +113,13 @@ define(function (require, exports, module) {
     },
 
     submit () {
-      var account = this.user.initAccount({
-        email: this.getElementValue('.email')
-      });
+      var account = this.getAccount();
+      var email = this.getElementValue('.email');
+      if (account.get('email') !== email) {
+        account = this.user.initAccount({
+          email: email
+        });
+      }
 
       var password = this.getElementValue('.password');
 
